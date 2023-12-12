@@ -35,7 +35,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B clean verify
+      run: mvn -B clean verify -Dtest=!com.gl.parcauto.selenuim.AuthControllerIntegrationTest,!com.gl.parcauto.selenuim.DriverControllerIntegrationTest,!com.gl.parcauto.selenuim.TripControllerIntegrationTest,!com.gl.parcauto.selenuim.UserControllerIntegrationTest,!com.gl.parcauto.selenuim.VehicleControllerIntegrationTest
+
     - name: run tests
       run: mvn -B test
     - name: Notify on build failure
@@ -52,7 +53,7 @@ jobs:
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
-        SLACK_MESSAGE: 'Build Failed :x:'
+        SLACK_MESSAGE: 'Build success :white_check_mark:'
         SLACK_USERNAME: GithubActions
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
