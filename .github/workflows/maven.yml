@@ -41,24 +41,20 @@ jobs:
     - name: Notify on build failure
       if: failure()
       uses: rtCamp/action-slack-notify@v2
-      with:
-        status: 'failure'
-        channel: ${{ secrets.SLACK_CHANNEL }}
-        text: "Build failed!"
-        username: "GitHub Actions"
-        icon_emoji: ":x:"
-        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      env:
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+        SLACK_MESSAGE: 'Build Failed :x:'
+        SLACK_USERNAME: GithubActions
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
     - name: Notify on build success
       if: success()
       uses: rtCamp/action-slack-notify@v2
-      with:
-        status: 'success'
-        channel: ${{ secrets.SLACK_CHANNEL }}
-        text: "Build success!"
-        username: "GitHub Actions"
-        icon_emoji: ":white_check_mark:"
-        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      env:
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+        SLACK_MESSAGE: 'Build Failed :x:'
+        SLACK_USERNAME: GithubActions
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   analyze:
       runs-on: ubuntu-latest
