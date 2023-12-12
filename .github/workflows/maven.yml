@@ -40,14 +40,14 @@ jobs:
       run: mvn -B test
     - name: Notify on build failure
       if: failure()
-      uses: Ilshidur/action-slack@2.1.0
+      uses: Ilshidur/action-slack@2.1.1
       with:
         args: "Build failed"
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
     - name: Notify on build success
       if: success()
-      uses: Ilshidur/action-slack@2.1.0
+      uses: Ilshidur/action-slack@2.1.1
       with:
         args: "Build success"
       env:
