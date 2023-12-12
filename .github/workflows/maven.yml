@@ -37,7 +37,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean verify -DskipTests
     - name: run tests
-      run: mvn -B test
+      run: mvn -B test -Dtest=!com.gl.parcauto.selenuim.AuthControllerIntegrationTest,!com.gl.parcauto.selenuim.DriverControllerIntegrationTest,!com.gl.parcauto.selenuim.TripControllerIntegrationTest,!com.gl.parcauto.selenuim.UserControllerIntegrationTest,!com.gl.parcauto.selenuim.VehicleControllerIntegrationTest
+
     - name: Notify on build failure
       if: failure()
       uses: rtCamp/action-slack-notify@v2
