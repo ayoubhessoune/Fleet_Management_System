@@ -40,7 +40,7 @@ jobs:
       run: mvn -B test
     - name: Notify on build failure
       if: failure()
-      uses: rtCamp/action-slack-notify@v4
+      uses: rtCamp/action-slack-notify@v2
       with:
         status: 'failure'
         channel: ${{ secrets.SLACK_CHANNEL }}
@@ -51,7 +51,7 @@ jobs:
 
     - name: Notify on build success
       if: success()
-      uses: rtCamp/action-slack-notify@v4
+      uses: rtCamp/action-slack-notify@v2
       with:
         status: 'success'
         channel: ${{ secrets.SLACK_CHANNEL }}
