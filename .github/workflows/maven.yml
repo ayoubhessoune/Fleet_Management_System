@@ -45,7 +45,7 @@ jobs:
         SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
         SLACK_MESSAGE: 'Build Failed :x:'
         SLACK_USERNAME: GithubActions
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     - name: Notify on build success
       if: success()
@@ -54,7 +54,7 @@ jobs:
         SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
         SLACK_MESSAGE: 'Build Failed :x:'
         SLACK_USERNAME: GithubActions
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   analyze:
       runs-on: ubuntu-latest
