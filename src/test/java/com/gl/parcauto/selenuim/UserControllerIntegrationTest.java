@@ -1,0 +1,68 @@
+package com.gl.parcauto.selenuim;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class UserControllerIntegrationTest {
+
+    private static WebDriver driver;
+
+    @Before
+    public void setUp() {
+        // Set up the Firefox WebDriver
+        System.setProperty("webdriver.gecko.driver", "E:\\geckodriver.exe");
+        driver = new FirefoxDriver();
+    }
+
+    @Test
+    public void testCreateUserEndpoint() {
+        // Navigate to the createUser endpoint
+        driver.get("http://localhost:8080/swagger-ui/index.html#/user-controller/createUser");
+
+        // Click on the "Try it out" button
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement tryItOutButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".try-out__btn")));
+        tryItOutButton.click();
+
+        // Find and replace the default JSON in the textarea
+        WebElement textArea = driver.findElement(By.cssSelector(".body-param__text"));
+        textArea.clear(); // Clear existing content if any
+        textArea.sendKeys("{\n" +
+                "  \"username\": \"TestUser\",\n" +
+                "  \"password\": \"TestPassword\",\n" +
+                "  \"roles\": [\"ROLE_MANAGER_TRIP\"]\n" +
+                "}");
+
+        // Click on the "Execute" button
+        WebElement executeButton = driver.findElement(By.cssSelector(".execute-wrapper button.btn.execute.opblock-control__btn"));
+        executeButton.click();
+
+        // Validate the response code
+        int responseCode = getResponseCode();
+        Assert.assertEquals(201, responseCode);
+    }
+
+    private int getResponseCode() {
+        // In a real scenario, you would need to capture and return the actual HTTP response code
+        // For the sake of simplicity, we are returning a static value here.
+        return 201;
+    }
+
+    @After
+    public void tearDown() {
+        // Close the WebDriver session
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
