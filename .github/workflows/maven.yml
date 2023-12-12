@@ -97,4 +97,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ayoubhessoune/Fleet_Management_System:latest
+          tags: hessoune/pfa:latest
