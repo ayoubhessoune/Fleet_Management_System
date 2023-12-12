@@ -40,18 +40,25 @@ jobs:
       run: mvn -B test
     - name: Notify on build failure
       if: failure()
-      uses: Ilshidur/action-slack@2.1.0
+      uses: rtCamp/action-slack-notify@v4
       with:
-        args: "Build failed"
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        status: 'failure'
+        channel: ${{ secrets.SLACK_CHANNEL }}
+        text: "Build failed!"
+        username: "GitHub Actions"
+        icon_emoji: ":x:"
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
     - name: Notify on build success
       if: success()
-      uses: Ilshidur/action-slack@2.1.0
+      uses: rtCamp/action-slack-notify@v4
       with:
-        args: "Build success"
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        status: 'success'
+        channel: ${{ secrets.SLACK_CHANNEL }}
+        text: "Build success!"
+        username: "GitHub Actions"
+        icon_emoji: ":white_check_mark:"
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   analyze:
       runs-on: ubuntu-latest
